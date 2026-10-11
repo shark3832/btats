@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b18">
+<title>Music Night | اسمع إحساسك</title>
+<style>
+:root{--bg:#070b17;--panel:#0e1428;--panel2:#121a33;--line:#242e50;--text:#f7f7ff;--muted:#a5aecb;--purple:#a52cff;--pink:#ed37d4;--cyan:#6f79ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -20%,#29124e 0,transparent 38%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;padding-bottom:115px}
+button,input{font:inherit}button{cursor:pointer}
+header{display:flex;align-items:center;gap:18px;padding:20px clamp(16px,4vw,48px);border-bottom:1px solid #202844;position:sticky;top:0;background:#080b17eF;backdrop-filter:blur(16px);z-index:5}
+.logo{font-size:23px;font-weight:800;white-space:nowrap}.logo span{color:#c03cff}.note{font-size:28px;color:#c03cff;margin-left:7px}
+.search{display:flex;gap:10px;flex:1;max-width:760px;margin:auto}.search input{width:100%;min-width:0;background:#111831;border:1px solid #303b63;color:white;border-radius:16px;padding:13px 16px;outline:none}.search input:focus{border-color:#ad43ff;box-shadow:0 0 0 3px #a52cff20}.btn{border:0;border-radius:13px;padding:12px 17px;color:white;background:linear-gradient(120deg,var(--purple),var(--pink));font-weight:700}.btn.secondary{background:#17203a;border:1px solid #303b63}
+main{max-width:1450px;margin:auto;padding:26px clamp(16px,4vw,48px)}
+.hero{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}.banner{min-height:230px;padding:34px;border:1px solid #38265d;border-radius:24px;background:linear-gradient(105deg,#110e27dd,#10172c99),radial-gradient(circle at 78% 35%,#8735db 0,transparent 36%),linear-gradient(135deg,#111a3b,#21123b);display:flex;flex-direction:column;justify-content:center;overflow:hidden}.banner h1{font-size:clamp(27px,4vw,43px);margin:0 0 10px;line-height:1.4}.banner h1 span{color:#d34aff}.banner p{color:#c5c8df;margin:0 0 20px;line-height:1.8}.info{border:1px solid #2b3457;border-radius:24px;padding:26px;background:linear-gradient(145deg,#10172c,#090e1c);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.headphones{font-size:56px;color:#8d4cff;margin-bottom:12px}.info h3{margin:0 0 9px}.info p{color:var(--muted);line-height:1.7;margin:0}
+.quick{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0}.chip{border:1px solid #303b5c;color:#dce0f8;background:#111831;border-radius:999px;padding:9px 15px}.chip.active,.chip:hover{background:#5b2390;border-color:#b04bff}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 15px}.section-title h2{font-size:21px;margin:0}.sub{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}.track{min-width:0;border:1px solid #202a48;background:#0c1224;border-radius:17px;padding:10px;transition:.2s}.track:hover{transform:translateY(-3px);border-color:#7431b6}.cover{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:linear-gradient(135deg,#251343,#19254b);display:flex;align-items:center;justify-content:center;font-size:40px;color:#d05bff;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover}.track-name{font-weight:700;margin:10px 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.artist{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-actions{display:flex;align-items:center;justify-content:space-between;margin-top:12px}.play-small,.heart{border:0;background:#222a46;color:white;border-radius:50%;width:35px;height:35px;font-size:16px}.heart{background:transparent;color:#b8bfd8;font-size:20px}.heart.saved{color:#ff5da2}.empty,.status{color:var(--muted);padding:25px;text-align:center;background:#0c1224;border:1px dashed #303b5c;border-radius:16px;line-height:1.8}.status.error{color:#ffb2c7}.hidden{display:none}
+footer.player{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#090d1cf5;border-top:1px solid #30385b;backdrop-filter:blur(18px);padding:12px clamp(12px,3vw,32px);display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;gap:18px}.now{display:flex;align-items:center;gap:12px;min-width:0}.mini-cover{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#582c8d,#18264d);display:grid;place-items:center;font-size:22px;flex-shrink:0}.now-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now-artist{color:var(--muted);font-size:12px;margin-top:5px}.controls{text-align:center}.control-buttons{display:flex;align-items:center;justify-content:center;gap:18px}.control-buttons button{background:none;border:0;color:#dfe3ff;font-size:20px}.control-buttons .main-play{width:45px;height:45px;border-radius:50%;background:linear-gradient(120deg,var(--purple),var(--pink));color:white;font-size:20px}.progress-row{display:flex;align-items:center;gap:10px;margin-top:8px;color:#aeb6d1;font-size:11px}.progress-row input{flex:1;min-width:0}.volume{display:flex;align-items:center;justify-content:flex-end;gap:10px;color:#dce0f8}.volume input{width:min(120px,45%)}input[type=range]{accent-color:#b735ff;cursor:pointer}.small-muted{font-size:11px;color:var(--muted)}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr}.info{display:none}footer.player{grid-template-columns:1fr 1.2fr}.volume{grid-column:1/-1;justify-content:center}.now{grid-row:1}.controls{grid-row:1}}
+@media(max-width:620px){header{flex-wrap:wrap;gap:12px}.logo{font-size:20px}.search{order:3;flex-basis:100%}.hero .banner{padding:24px;min-height:210px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.track{padding:8px}.section-title h2{font-size:18px}footer.player{grid-template-columns:1fr auto;gap:8px;padding:9px 12px}.now{grid-column:1;grid-row:1}.controls{grid-column:2;grid-row:1}.control-buttons{gap:8px}.control-buttons button{font-size:17px}.control-buttons .main-play{width:39px;height:39px}.progress-row{display:none}.volume{grid-column:1/-1;grid-row:2;justify-content:center}.volume input{width:140px}.mini-cover{width:42px;height:42px}.now-title{max-width:145px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span class="note">♫</span> Music <span>Night</span></div>
+  <form class="search" id="searchForm">
+    <input id="searchInput" placeholder="ابحث عن أغنية أو مطرب... مثال: عمرو دياب" aria-label="ابحث عن أغنية أو مطرب">
+    <button class="btn" type="submit">ابحث</button>
+  </form>
+</header>
+<main>
+  <section class="hero">
+    <div class="banner">
+      <h1>موسيقاك.. <span>في كل لحظة</span></h1>
+      <p>اكتشف موسيقى جديدة وابحث بالعربي أو بالإنجليزي.<br>ابدأ الاستماع بضغطة واحدة.</p>
+      <button class="btn" id="startBtn" style="align-self:flex-start">▶ ابدأ الاستماع</button>
+    </div>
+    <div class="info"><div class="headphones">♫</div><h3>موسيقاك في مكان واحد</h3><p>ابحث، شغّل، احفظ المفضلة، وتحكّم في الصوت بسهولة.</p></div>
+  </section>
+  <div class="quick" aria-label="عمليات بحث سريعة">
+    <button class="chip active" data-query="arabic">🎶 موسيقى عربية</button>
+    <button class="chip" data-query="egyptian">🇪🇬 أجواء مصرية</button>
+    <button class="chip" data-query="pop">✨ Pop</button>
+    <button class="chip" data-query="chill">🌙 هدوء واسترخاء</button>
+    <button class="chip" data-query="favorites">❤️ المفضلة</button>
+  </div>
+  <div class="section-title"><h2 id="resultsTitle">🎧 اكتشف موسيقى جديدة</h2><span class="sub" id="resultCount"></span></div>
+  <div id="status" class="status">اضغط على «موسيقى عربية» أو اكتب اسم الأغنية أو المطرب في مربع البحث.</div>
+  <div id="tracks" class="grid"></div>
+  <p class="small-muted" style="margin-top:20px">ملاحظة: مصدر التشغيل الحالي هو Jamendo، ومكتبته لا تضم بالضرورة الأغاني التجارية المشهورة مثل كل أغاني عمرو دياب أو تامر حسني. البحث يعرض المقاطع المتاحة فعليًا في المصدر.</p>
+</main>
+<footer class="player">
+  <div class="now">
+    <div class="mini-cover" id="miniCover">♫</div>
+    <div style="min-width:0"><div class="now-title" id="nowTitle">اختار أغنية للبدء</div><div class="now-artist" id="nowArtist">Music Night</div></div>
+    <button class="heart" id="currentHeart" title="إضافة للمفضلة">♡</button>
+  </div>
+  <div class="controls">
+    <div class="control-buttons">
+      <button id="prevBtn" title="السابق">⏮</button>
+      <button class="main-play" id="playBtn" title="تشغيل أو إيقاف">▶</button>
+      <button id="nextBtn" title="التالي">⏭</button>
+    </div>
+    <div class="progress-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="100" value="0"><span id="duration">0:00</span></div>
+  </div>
+  <div class="volume"><span>🔊</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="مستوى الصوت"><span id="volumeLabel">70%</span></div>
+</footer>
+<audio id="audio" preload="none" crossorigin="anonymous"></audio>
+<script>
+const CLIENT_ID = "3e71fd13";
+const $ = s => document.querySelector(s);
+const audio = $("#audio");
+let tracks = [], currentIndex = -1, favorites = JSON.parse(localStorage.getItem("mn_favorites") || "[]"), currentMode = "arabic";
+const queries = {
+  arabic: ["arabic music", "oriental"],
+  egyptian: ["egyptian music", "arabic pop"],
+  pop: ["pop"],
+  chill: ["chillout"],
+};
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function time(sec){if(!Number.isFinite(sec)||sec<0)return "0:00";return Math.floor(sec/60)+":"+String(Math.floor(sec%60)).padStart(2,"0")}
+function setStatus(msg,error=false){$("#status").textContent=msg;$("#status").classList.toggle("error",error);$("#status").classList.remove("hidden")}
+function apiUrl(q){return "https://api.jamendo.com/v3.0/tracks/?client_id="+encodeURIComponent(CLIENT_ID)+"&format=json&limit=30&search="+encodeURIComponent(q)+"&audioformat=mp31&include=musicinfo&order=popularity_total"}
+async function searchTracks(q,title){
+  currentMode = q; $("#resultsTitle").textContent=title||"🎧 نتائج البحث";$("#tracks").innerHTML="";$("#resultCount").textContent="";
+  setStatus("بدورلك على موسيقى متاحة للتشغيل…");
+  try{
+    let combined=[];
+    for(const term of (queries[q]||[q])){
+      const res=await fetch(apiUrl(term)); if(!res.ok) throw new Error("تعذّر الاتصال بمصدر الموسيقى");
+      const data=await res.json(); if(data.headers && data.headers.status==="failed") throw new Error(data.headers.error_message||"تعذّر جلب النتائج");
+      combined=combined.concat(data.results||[]);
+    }
+    const seen=new Set(); tracks=combined.filter(t=>t.audio && !seen.has(t.id) && seen.add(t.id));
+    renderTracks();
+    if(!tracks.length)setStatus("ملقيتش مقاطع متاحة في المصدر للكلمة دي. جرّب اسمًا بالإنجليزي أو كلمة عامة مثل Arabic أو Pop.");
+    else $("#status").classList.add("hidden");
+  }catch(e){tracks=[];renderTracks();setStatus("حصلت مشكلة في جلب الأغاني. تأكد من اتصال الإنترنت ثم جرّب تاني. ("+e.message+")",true)}
+}
+function renderTracks(){
+  const list=currentMode==="favorites"?tracks.filter(t=>favorites.includes(String(t.id))):tracks;
+  $("#resultCount").textContent=list.length+" مقطع";
+  $("#tracks").innerHTML=list.map((t,i)=>`<article class="track">
+    <div class="cover">${t.image?`<img src="${esc(t.image)}" alt="" loading="lazy">`:"♫"}</div>
+    <div class="track-name" title="${esc(t.name)}">${esc(t.name)}</div>
+    <div class="artist" title="${esc(t.artist_name)}">${esc(t.artist_name)}</div>
+    <div class="track-actions"><button class="play-small" data-play="${i}" title="تشغيل">▶</button><button class="heart ${favorites.includes(String(t.id))?"saved":""}" data-heart="${esc(t.id)}" title="المفضلة">${favorites.includes(String(t.id))?"♥":"♡"}</button></div>
+  </article>`).join("");
+  if(!list.length && currentMode==="favorites")setStatus("لسه مفيش أغاني في المفضلة. اضغط على ♡ بجانب أي أغنية لإضافتها.");
+}
+function playIndex(i){const list=currentMode==="favorites"?tracks.filter(t=>favorites.includes(String(t.id))):tracks;if(i<0||i>=list.length)return;const t=list[i];currentIndex=tracks.findIndex(x=>String(x.id)===String(t.id));audio.src=t.audio;audio.play().then(()=>{$("#playBtn").textContent="Ⅱ";$("#nowTitle").textContent=t.name;$("#nowArtist").textContent=t.artist_name;$("#miniCover").innerHTML=t.image?`<img src="${esc(t.image)}" style="width:100%;height:100%;object-fit:cover;border-radius:9px">`:"♫";updateCurrentHeart()}).catch(()=>setStatus("المقطع ده مش قادر يشتغل دلوقتي. جرّب مقطع تاني.",true))}
+function updateCurrentHeart(){const t=tracks[currentIndex];$("#currentHeart").textContent=t&&favorites.includes(String(t.id))?"♥":"♡";$("#currentHeart").classList.toggle("saved",!!t&&favorites.includes(String(t.id)))}
+function toggleFavorite(id){id=String(id);favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];localStorage.setItem("mn_favorites",JSON.stringify(favorites));renderTracks();updateCurrentHeart()}
+$("#searchForm").addEventListener("submit",e=>{e.preventDefault();const q=$("#searchInput").value.trim();if(q)searchTracks(q,"🔎 نتائج البحث عن: "+q)});
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");const q=b.dataset.query;if(q==="favorites"){currentMode="favorites";$("#resultsTitle").textContent="❤️ أغانيك المفضلة";renderTracks();if(!tracks.length)setStatus("ابحث عن موسيقى وأضف اللي يعجبك للمفضلة.");}else searchTracks(q, b.textContent)}));
+$("#tracks").addEventListener("click",e=>{const p=e.target.closest("[data-play]");const h=e.target.closest("[data-heart]");if(p)playIndex(Number(p.dataset.play));if(h)toggleFavorite(h.dataset.heart)});
+$("#playBtn").addEventListener("click",()=>{if(!audio.src){playIndex(0);return}if(audio.paused)audio.play().then(()=>$("#playBtn").textContent="Ⅱ");else{audio.pause();$("#playBtn").textContent="▶"}});
+$("#prevBtn").addEventListener("click",()=>playIndex(Math.max(0,currentIndex-1)));
+$("#nextBtn").addEventListener("click",()=>playIndex(Math.min(tracks.length-1,currentIndex+1)));
+$("#startBtn").addEventListener("click",()=>{if(tracks.length)playIndex(0);else searchTracks("arabic","🎧 موسيقى عربية")});
+$("#volume").addEventListener("input",e=>{audio.volume=Number(e.target.value);$("#volumeLabel").textContent=Math.round(audio.volume*100)+"%"});
+audio.volume=.7;
+audio.addEventListener("timeupdate",()=>{if(audio.duration){$("#seek").value=audio.currentTime/audio.duration*100;$("#currentTime").textContent=time(audio.currentTime);$("#duration").textContent=time(audio.duration)}});
+$("#seek").addEventListener("input",e=>{if(audio.duration)audio.currentTime=audio.duration*Number(e.target.value)/100});
+audio.addEventListener("ended",()=>{if(currentIndex<tracks.length-1)playIndex(currentIndex+1);else $("#playBtn").textContent="▶"});
+$("#currentHeart").addEventListener("click",()=>{if(currentIndex>=0)toggleFavorite(tracks[currentIndex].id)});
+searchTracks("arabic","🎧 اكتشف موسيقى جديدة");
+</script>
+</body></html>
